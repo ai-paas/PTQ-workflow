@@ -4,3 +4,5 @@
 __pycache__
 # env 환경설정 파일
 .env
+# ide 설정파일
+.idea
