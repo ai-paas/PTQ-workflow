@@ -1,6 +1,11 @@
-from fastapi import APIRouter
+from uuid import uuid4
 
+from fastapi import APIRouter
+from sqlalchemy.orm import Session
+
+from app.core.db.connect import SessionDepends
 from app.schemas.requests import model
+from app.services.model_service import ModelService
 
 router = APIRouter()
 
@@ -12,6 +17,7 @@ router = APIRouter()
 @router.post("", response_model=model.ModelCreateForm)
 def lite_model(
     *,
+    db: Session = SessionDepends,
     model_create_form: model.ModelCreateForm,
 ):
     """
@@ -19,9 +25,14 @@ def lite_model(
         - lite_type
             1. ptq
     """
+    ModelService.lite_model(db=db)
     return {"test": model_create_form.name, "test2": model_create_form.lite_type}
 
 
 @router.get("")
-def get_models():
+def get_models(
+    *,
+    db: Session = SessionDepends,
+):
+
     return "test"

@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import router
+from app.core.db.models import model_task
+from app.core.db.session import engine
+
+model_task.Base.metadata.create_all(bind=engine)
 
 SWAGGER_TITLE = "AI-PaaS PTQ Workflow"
 SWAGGER_SUMMARY = "PTQ Workflow Backend Server"
