@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     KUBEFLOW_PASSWORD: str
     KUBEFLOW_NAMESPACE: str
 
+    SERVER_IP: str
     # 차후 DB 적용시 입력
     # DB_NAME: str
     # DB_USER: str
