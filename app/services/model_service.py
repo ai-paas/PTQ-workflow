@@ -58,7 +58,7 @@ class ModelService:
                     "--server_uuid",
                     uuid_str,
                     "--server_path",
-                    response_server_url,
+                    f"{response_server_url}/api/v1/tasks",
                 ],
             )
 
@@ -88,8 +88,3 @@ class ModelService:
         db.commit()
 
         return {"task_uuid": uuid_str, "kubeflow_experiment_id": kubeflow_experiment_id}
-
-    def get_lite_model(
-        db: Session,
-    ):
-        pass

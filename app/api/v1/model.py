@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from app.core.db.connect import SessionDepends
 from app.schemas.requests import model
 from app.services.model_service import ModelService
-from app.utils.kfp_client_manager import kfp_client
 
 router = APIRouter()
 
@@ -14,7 +13,6 @@ router = APIRouter()
 
 
 @router.post("")
-# @router.post("", response_model=model.ModelCreateForm)
 def lite_model(
     *,
     db: Session = SessionDepends,
@@ -27,15 +25,3 @@ def lite_model(
     """
     result = ModelService.lite_model_ptq(db=db, model_create_form=lite_model_form)
     return result
-
-
-@router.get("")
-def get_model(
-    *,
-    db: Session = SessionDepends,
-):
-    ModelService.get_lite_model(
-        db=db,
-    )
-    test = kfp_client.get_run(run_id="a25b2786-74f9-4d52-bb70-95df24c6d7ea")
-    return "test"
