@@ -29,7 +29,7 @@ class ModelService:
 
         # 사용할 컨테이너 정의 및 설정 추가
         @dsl.container_component
-        def ptq_workflow(greeting: dsl.OutputPath(str)):
+        def ptq_workflow():
             quantization_layers_str = ",".join(model_create_form.quantization_layers)
             return dsl.ContainerSpec(
                 # 사용할 도커이미지의 주소 및 태그
@@ -42,8 +42,7 @@ class ModelService:
                     "main.py",
                 ],
                 # 필요한 변수들 정의 (string으로 정의)
-                args=[greeting]
-                + [
+                args=[
                     "--model_name",
                     model_create_form.name,
                     "--model_run_id",
