@@ -1,7 +1,4 @@
-import uuid
-
 from sqlalchemy import Integer, String, orm
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped
 
 from app.core.db.models.base import Base
@@ -13,7 +10,7 @@ class ModelTask(Base):
 
     # 모델 저장 요청별 uuid
     # TODO: 모델 저장시 바로 가져올수 있으면 지우기
-    task_uuid: Mapped[uuid.UUID] = orm.mapped_column(UUID)
+    task_uuid: Mapped[str] = orm.mapped_column(String, nullable=False)
 
     # 요청 작업 성공 여부 (기본값 False)
     progress_status: Mapped[bool] = orm.mapped_column(default=False, nullable=False)
@@ -31,5 +28,6 @@ class ModelTask(Base):
     model_path_output: Mapped[str] = orm.mapped_column(
         String, nullable=True, default=None
     )
-    # TODO 컬럼 추가
-    # ex) run_id
+
+    # kubeflow experiment id
+    kubeflow_experiment_id: Mapped[str] = orm.mapped_column(String, nullable=False)
