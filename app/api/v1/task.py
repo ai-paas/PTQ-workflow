@@ -48,7 +48,7 @@ def patch_task(
     task = db.query(ModelTask).filter(ModelTask.task_uuid == task_id).first()
     updates = {
         "progress_status": patch_task_form.progress_status,
-        "model_path_output": patch_task_form.model_path_output,
+        "model_path_output": patch_task_form.path_output_model,
     }
     if task:
         for key, value in updates.items():

@@ -10,4 +10,4 @@ class PatchTaskForm(BaseModel):
     progress_status: bool
 
     # 경량화 모델 저장 경로
-    model_path_output: str
+    path_output_model: str
