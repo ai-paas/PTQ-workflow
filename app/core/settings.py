@@ -1,7 +1,6 @@
 from enum import Enum
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
 
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -32,7 +31,13 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     DB_TYPE: str
+    # kubeflow 관련 설정
+    KUBEFLOW_ENDPOINT: str
+    KUBEFLOW_USERNAME: str
+    KUBEFLOW_PASSWORD: str
+    KUBEFLOW_NAMESPACE: str
 
+    SERVER_IP: str
     # 차후 DB 적용시 입력
     # DB_NAME: str
     # DB_USER: str
@@ -58,24 +63,11 @@ class Settings(BaseSettings):
     # MILVUS_DB_NAME: str
     # MILVUS_ADMIN_PORT: str
 
-    USER_MODELS: dict[str, dict] = {}
-
     @property
     def get_db_uri(self) -> str:
         """Environment variables로부터 DB 정보를 받아와 URI를 반환 (차후 DB 적용시 입력)"""
         # return f"{self.DB_TYPE}://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         return f"{self.DB_TYPE}:///sqlite.db"
-
-    @property
-    def get_clean_rdb_type(self) -> str:
-        return RDBName(self.DB_TYPE).name
-
-    @property
-    def user_models(self) -> dict[str, dict]:
-        return self.USER_MODELS
-
-    def add_user_model(self, key: str, value: Any):
-        self.USER_MODELS[key] = value
 
 
 @lru_cache

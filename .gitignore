@@ -6,3 +6,5 @@ __pycache__
 .env
 # ide 설정파일
 .idea
+# sqlite DB
+sqlite.db

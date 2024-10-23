@@ -34,7 +34,8 @@ virtualenv = "==20.26.6"
 watchfiles = "==0.24.0"
 websockets = "==13.1"
 pipfile = "*"
-uvicorn = {extras = ["standard"], version = "*"}
+uvicorn = {extras = ["standard"] }
+kfp = "==2.9.0"
 
 [dev-packages]
 
